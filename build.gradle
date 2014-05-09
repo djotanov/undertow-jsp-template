@@ -1,0 +1,24 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.7
+version = '1.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://repository.jboss.org/nexus/content/repositories/releases/'
+    }
+}
+
+dependencies {
+    compile 'io.undertow:undertow-core:1.0.6.Final'
+    compile 'io.undertow:undertow-servlet:1.0.6.Final'
+    compile 'io.undertow.jastow:jastow:1.0.0.Final'
+    runtime 'org.jboss.spec.javax.el:jboss-el-api_3.0_spec:1.0.3.Final'
+    runtime 'org.glassfish:javax.el:3.0.0'
+    runtime 'org.jboss.spec.javax.servlet.jsp:jboss-jsp-api_2.3_spec:1.0.1.Final'
+    runtime 'org.eclipse.jdt.core.compiler:ecj:4.3.1'
+    runtime 'org.jboss.spec.javax.servlet.jstl:jboss-jstl-api_1.2_spec:1.1.0.Final'
+    compile 'org.jboss.metadata:jboss-metadata-common:8.0.0.Final'
+    compile 'org.jboss.metadata:jboss-metadata-web:8.0.0.Final'
+}

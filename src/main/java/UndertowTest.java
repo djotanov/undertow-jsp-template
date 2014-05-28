@@ -7,6 +7,7 @@ import io.undertow.server.handlers.resource.FileResourceManager;
 import io.undertow.servlet.Servlets;
 import io.undertow.servlet.api.DeploymentInfo;
 import io.undertow.servlet.api.DeploymentManager;
+import io.undertow.servlet.api.ErrorPage;
 import io.undertow.servlet.api.ServletInfo;
 import org.apache.jasper.deploy.*;
 import org.jboss.annotation.javaee.Icon;
@@ -33,12 +34,12 @@ public class UndertowTest {
     public static void main(String[] args) throws Exception {
         File tempDir = new File("./tmp/");
         if (!tempDir.exists()) tempDir.mkdirs();
-        System.out.println("Root: " + new File(".").getAbsolutePath());
+        System.out.println("Root: " + new File("").getAbsolutePath());
 
         DeploymentInfo deploymentInfo = Servlets.deployment()
                 .setClassLoader(UndertowTest.class.getClassLoader())
                 .setContextPath("/test")
-                .setResourceManager(new FileResourceManager(new File("."), 0))
+                .setResourceManager(new FileResourceManager(new File(""), 0))
                 .setTempDir(tempDir)
                 .addWelcomePage("index.jsp")
                 .setDeploymentName("test.war");
@@ -49,6 +50,10 @@ public class UndertowTest {
         jspServlet.addInitParam("keepgenerated", "true");
         jspServlet.addInitParam("scratchDir", "jsp");
         deploymentInfo.addServlet(jspServlet);
+        ServletInfo pageNotFoundServlet = Servlets.servlet("404Servlet", PageNotFoundServlet.class).addMapping("/404");
+        deploymentInfo.addServlet(pageNotFoundServlet);
+        deploymentInfo.addErrorPage(new ErrorPage("/404.jsp", 404));
+//        deploymentInfo.addErrorPage(new ErrorPage("/404", 404));
 
         DeploymentManager manager = Servlets.defaultContainer().addDeployment(deploymentInfo);
         manager.deploy();

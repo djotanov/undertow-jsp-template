@@ -11,8 +11,8 @@ repositories {
 }
 
 dependencies {
-    compile 'io.undertow:undertow-core:1.0.6.Final'
-    compile 'io.undertow:undertow-servlet:1.0.6.Final'
+    compile 'io.undertow:undertow-core:1.0.14.Final'
+    compile 'io.undertow:undertow-servlet:1.0.14.Final'
     compile 'io.undertow.jastow:jastow:1.0.0.Final'
     runtime 'org.jboss.spec.javax.el:jboss-el-api_3.0_spec:1.0.3.Final'
     runtime 'org.glassfish:javax.el:3.0.0'
